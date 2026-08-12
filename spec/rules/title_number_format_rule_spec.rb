@@ -17,4 +17,4 @@ RSpec.describe TitleNumberFormatRule do
     defect_report = TitleNumberFormatRule.new.check(application)
     expect(defect_report.reason).to eq("Invalid Title Number format.")
   end
-end 
+end
