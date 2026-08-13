@@ -23,4 +23,12 @@ RSpec.describe RequiredDocumentsRule do
 
     expect(@rule.check(application).reason).to eq("Missing required documents.")
   end
+
+  it "flags when some documents are missing" do
+    application = Application.new(title_number: "AB1234", transaction_type: "lease",
+      parties: [{first_name: "Jon", last_name: "Jones", role: "Buyer"},{first_name: "Conor", last_name: "McGregor", role: "Landlord"}], 
+      fee_paid: 270, documents: [])
+
+    expect(@rule.check(application).reason).to eq("Missing required documents.")
+  end
 end
