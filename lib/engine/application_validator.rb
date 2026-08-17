@@ -1,4 +1,5 @@
 require_relative "../application"
+require_relative "requisition_report"
 
 class ApplicationValidator
   def initialize(rules)
@@ -6,6 +7,7 @@ class ApplicationValidator
   end
 
   def validate(application)
-    @rules.map { |rule| rule.check(application) }.compact
+    defects = @rules.map { |rule| rule.check(application) }.compact
+    RequisitionReport.new(defects)
   end
 end

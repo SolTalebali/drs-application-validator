@@ -16,9 +16,9 @@ RSpec.describe ApplicationValidator do
       parties: [{first_name: "Jon", last_name: "Jones", role: "Buyer"},{first_name: "Conor", last_name: "McGregor", role: "Landlord"}], 
       fee_paid: 270, documents: ["TR1", "ID1", "ID2"])
 
-    results = ApplicationValidator.new([@fee_correct_rule, @required_documents_rule, @title_number_format_rule]).validate(application)
+    report = ApplicationValidator.new([@fee_correct_rule, @required_documents_rule, @title_number_format_rule]).validate(application)
 
-    expect(results.length).to eq(0)
+    expect(report.clean?).to eq(true)
   end
 
   it "returns a list of defects when passed faulty application." do
@@ -28,7 +28,7 @@ RSpec.describe ApplicationValidator do
 
     results = ApplicationValidator.new([@fee_correct_rule, @required_documents_rule, @title_number_format_rule]).validate(application)
 
-    expect(results.length).to eq(3)
+    expect(results.defects.length).to eq(3)
   end
 
   it "returns two specific fraud rule defects for two defect in the application." do
@@ -38,8 +38,8 @@ RSpec.describe ApplicationValidator do
 
     results = ApplicationValidator.new([@fee_correct_rule, @required_documents_rule, @title_number_format_rule]).validate(application)
 
-    expect(results.length).to eq(2)
-    expect(results[0].reason).to eq("Incorrect fee details.")
-    expect(results[1].reason).to eq("Missing required documents.")
+    expect(results.defects.length).to eq(2)
+    expect(results.defects[0].reason).to eq("Incorrect fee details.")
+    expect(results.defects[1].reason).to eq("Missing required documents.")
   end
 end

@@ -17,4 +17,12 @@ RSpec.describe TitleNumberFormatRule do
     defect_report = TitleNumberFormatRule.new.check(application)
     expect(defect_report.reason).to eq("Invalid Title Number format.")
   end
+
+  it "returns \"Invalid Title Number.\" when title number is nil" do
+    application = Application.new(title_number: nil, transaction_type: "transfer",
+     parties: ["Landlord", "Buyer"], fee_paid: 240, documents: ["TR1", "ID1", "ID2"])
+    
+    defect_report = TitleNumberFormatRule.new.check(application)
+    expect(defect_report.reason).to eq("Invalid Title Number.")
+  end
 end
