@@ -6,10 +6,10 @@ class TitleNumberFormatRule
   def check(application)
     if application.title_number.nil?
       Defect.new("Invalid Title Number.")
-    elsif application.title_number.match?(TITLE_NUMBER_FORMAT) 
-     nil
+    elsif application.title_number.match?(TITLE_NUMBER_FORMAT)
+      nil
     else
-     Defect.new("Invalid Title Number format.")
+      Defect.new("Invalid Title Number format.")
     end
   end
 end

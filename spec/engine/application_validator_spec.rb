@@ -31,7 +31,7 @@ RSpec.describe ApplicationValidator do
     expect(results.defects.length).to eq(3)
   end
 
-  it "returns two specific fraud rule defects for two defect in the application." do
+  it "returns two specific defects for two defects in the application." do
     application = Application.new(title_number: "AB1234", transaction_type: "charge",
       parties: [{first_name: "Jon", last_name: "Jones", role: "Buyer"},{first_name: "Conor", last_name: "McGregor", role: "Landlord"}], 
       fee_paid: 270, documents: ["TR1", "ID1", "ID2"])
