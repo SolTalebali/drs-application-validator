@@ -26,3 +26,16 @@ bundle install
 ```
 bundle exec rspec
 ```
+
+## Running with Docker
+
+```
+docker build -t drs-validator .
+docker run --rm drs-validator
+```
+
+Builds an image with the gems already installed, then runs the test suite inside a container.
+
+## CI
+
+Tests run automatically on every push and pull request to `main` via GitHub Actions (`.github/workflows/ci.yml`).
