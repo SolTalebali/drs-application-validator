@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'docker build -t drs-validator c:\\Coding\\drs-application-validator'
+                bat 'docker build -t drs-validator .'
             }
         }
         stage('Test') {
