@@ -1,0 +1,28 @@
+require_relative "../lib/application_loader"
+require_relative "../lib/engine/application_validator"
+require_relative "../lib/rules/title_number_format_rule"
+require_relative "../lib/rules/parties_present_rule"
+require_relative "../lib/rules/fee_correct_rule"
+require_relative "../lib/rules/required_documents_rule"
+require_relative "../lib/rules/transaction_type_known_rule"
+require_relative "../lib/fees"
+require_relative "../lib/required_documents"
+
+rules = [
+  TitleNumberFormatRule.new,
+  PartiesPresentRule.new,
+  FeeCorrectRule.new(FEES),
+  RequiredDocumentsRule.new(REQUIRED_DOCUMENTS),
+  TransactionTypeKnownRule.new
+]
+
+application = ApplicationLoader.load(ARGV[0])
+
+report = ApplicationValidator.new(rules).validate(application)
+
+if report.clean?
+  puts "Application is clean."
+else
+  puts "Application has defects:"
+  report.defects.each { |defect| puts "- #{defect.reason}"}
+end

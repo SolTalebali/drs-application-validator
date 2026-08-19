@@ -1,0 +1,1 @@
+REQUIRED_DOCUMENTS = { "transfer" => ["TR1"], "charge" => ["CH1"], "lease" => ["Lease Deed"] }

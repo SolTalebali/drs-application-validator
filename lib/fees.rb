@@ -1,0 +1,1 @@
+FEES = { "transfer" => 270, "charge" => 40, "lease" => 90 }
